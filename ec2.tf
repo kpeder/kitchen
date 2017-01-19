@@ -1,4 +1,4 @@
-resource "aws_instance" "bashtest" {
+resource "aws_instance" "inspec_test" {
   key_name                    = "${var.keypair}"
   ami                         = "ami-7c803d1c"
   instance_type               = "t2.micro"
@@ -10,12 +10,12 @@ resource "aws_instance" "bashtest" {
   }
 
   tags {
-    Name = "bash test"
+    Name = "inspec_test"
   }
 }
 
-resource "aws_security_group" "bashtest" {
-  name   = "bashtest"
+resource "aws_security_group" "inspec_test" {
+  name   = "inspec_test"
 }
 
 resource "aws_security_group_rule" "ingress_ssh_workstation" {
@@ -24,9 +24,9 @@ resource "aws_security_group_rule" "ingress_ssh_workstation" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["${var.wkstn_cidr}"]
-  security_group_id = "${aws_security_group.bashtest.id}"
+  security_group_id = "${aws_security_group.inspec_test.id}"
 }
 
-output "bashtest" {
-  value = "${aws_instance.bashtest.public_dns}"
+output "inspec_test" {
+  value = "${aws_instance.inspec_test.public_dns}"
 }

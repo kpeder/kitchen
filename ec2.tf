@@ -1,6 +1,6 @@
-resource "aws_instance" "batstest" {
+resource "aws_instance" "bashtest" {
   key_name                    = "${var.keypair}"
-  ami                         = "ami-7c803d1c"  #xenial, for bats
+  ami                         = "ami-7c803d1c"
   instance_type               = "t2.micro"
   count                       = 1
 
@@ -10,12 +10,12 @@ resource "aws_instance" "batstest" {
   }
 
   tags {
-    Name = "bats test"
+    Name = "bash test"
   }
 }
 
-resource "aws_security_group" "batstest" {
-  name   = "batstest"
+resource "aws_security_group" "bashtest" {
+  name   = "bashtest"
 }
 
 resource "aws_security_group_rule" "ingress_ssh_workstation" {
@@ -24,9 +24,9 @@ resource "aws_security_group_rule" "ingress_ssh_workstation" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["${var.wkstn_cidr}"]
-  security_group_id = "${aws_security_group.batstest.id}"
+  security_group_id = "${aws_security_group.bashtest.id}"
 }
 
-output "batstest" {
-  value = "${aws_instance.batstest.public_dns}"
+output "bashtest" {
+  value = "${aws_instance.bashtest.public_dns}"
 }

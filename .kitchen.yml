@@ -19,7 +19,7 @@ verifier:
   format: doc
   groups:
     - name: default
-      hostnames: batstest
+      hostnames: bashtest
       username: ubuntu
 
 suites:

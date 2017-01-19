@@ -1,0 +1,26 @@
+---
+driver:
+  name: terraform
+
+provisioner:
+  name: terraform
+  variable_files:
+    - terraform.tfvars
+
+platforms:
+  - name: ubuntu
+
+transport:
+  name: ssh
+  ssh_key: ~/.ssh/mykeys/kpedersen_aws_rsa
+
+verifier:
+  name: terraform
+  format: doc
+  groups:
+    - name: default
+      hostnames: batstest
+      username: ubuntu
+
+suites:
+  - name: default
